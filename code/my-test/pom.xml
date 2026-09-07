@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.june</groupId>
+    <artifactId>my-test</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- ★★★★★ 这就是调用我们自定义插件的配置 ★★★★★ -->
+    <build>
+        <plugins>
+            <!-- 引用本地仓库里的 my-first-plugin -->
+            <plugin>
+                <groupId>com.june</groupId>
+                <artifactId>my-first-plugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <configuration>
+                    <!-- 这个值会传给 GreetingMojo 里的 name 参数 -->
+                    <name>来自 my-test 的问候</name>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

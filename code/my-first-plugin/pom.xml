@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.june</groupId>
+    <artifactId>my-first-plugin</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- ★ 第1步：声明这是一个插件项目 -->
+    <packaging>maven-plugin</packaging>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- ★ 第2步：必须引入 Maven 插件API -->
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>3.9.6</version>
+        </dependency>
+        <!-- ★ 第3步：必须引入注解处理器，不然 @Mojo 无法识别 -->
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>3.6.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- ★ 第4步：为了获取项目信息（project.getName()），引入maven-core -->
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-core</artifactId>
+            <version>3.9.6</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <!-- 1. 锁定编译器的版本，让它完美适配 JDK 21 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                </configuration>
+            </plugin>
+
+            <!-- 2. 最关键：显式指定 maven-plugin-plugin 版本，修复索引越界问题 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.15.0</version>
+                <executions>
+                    <execution>
+                        <id>default-descriptor</id>
+                        <goals>
+                            <goal>descriptor</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                    </execution>
+                </executions>
+                <!-- ★★★ 就是这里：给它起个简短好记的名字 ★★★ -->
+                <configuration>
+                    <!-- 我建议叫 greet，这样以后执行 mvn greet:sayhi 就能跑 -->
+                    <goalPrefix>greet</goalPrefix>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
