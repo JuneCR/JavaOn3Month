@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--指定相应的接口-->
+<mapper namespace="com.june.mapper.EmployeeMapper">
+    <!--  注意mapper接口 不能 重载 ！！！ 因为mapper.xml文件不能重载  -->
+    <select id="queryById"  resultType="com.june.pojo.Employee">
+        select emp_id empId,emp_name empName, emp_salary empSalary from
+        t_emp where emp_id = #{id}
+    </select>
+    <delete id="deleteById">
+        delete from t_emp where emp_id = #{id}
+    </delete>
+</mapper>
