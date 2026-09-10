@@ -81,3 +81,4 @@ Java层面
 > 注意: 例mvn clean package 是先执行clean  然后在从default这条线开始仅仅执行到package就结束
 >
 > ​	当然也可以执行具体的阶段 比如 mvn package 
+
