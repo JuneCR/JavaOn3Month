@@ -82,3 +82,10 @@ Java层面
 >
 > ​	当然也可以执行具体的阶段 比如 mvn package 
 
+#### 9.11 https://github.com/JuneCR/kanban-cli-app.git issue #5  
+
+​	完成
+
+​	
+
+​	
