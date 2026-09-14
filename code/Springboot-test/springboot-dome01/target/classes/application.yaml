@@ -1,0 +1,16 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+spring:
+  datasource:
+      driverClassName: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql:///springboot_02
+      username: root
+      password: root
+      names:
+        -zhangsna
+        -lishi
+        -wangwu
+  profiles:
+    active: test , dev
